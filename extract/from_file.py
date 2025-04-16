@@ -18,6 +18,6 @@ class FileExtractor:
             file_path = department_path / filename
             df = pd.read_csv(file_path)
             all_data[filename] = df
-            self.logger.log(f"✅ Extracted {len(df)} rows from {filename} in {department}")
+            self.logger.log(f"  Extracted {len(df)} rows from {filename} in {department}")
         
         return all_data
