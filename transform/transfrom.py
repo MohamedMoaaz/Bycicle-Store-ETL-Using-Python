@@ -14,7 +14,7 @@ class DataTransformer:
         # Merge exchange rates and calculate local price
         self.df = self.df.merge(self.exchange_rate_df[['currency', 'rate']], how='left', left_on='currency', right_on='currency')
         self.df['local_price'] = self.df['price'] * self.df['rate']
-        self.logger.log("✅ Merged exchange rates and calculated local price.")
+        self.logger.log("  Merged exchange rates and calculated local price.")
         return self.df
 
     def calculate_delivery_metrics(self):
@@ -25,14 +25,14 @@ class DataTransformer:
         # Calculate late-trip days
         self.df['late_trip_days'] = (self.df['delivery_date'] - self.df['expected_delivery_date']).dt.days
         self.df['late_trip_days'] = self.df['late_trip_days'].apply(lambda x: x if x > 0 else 0)  # Only count positive late days
-        self.logger.log("✅ Calculated late deliveries and late-trip days.")
+        self.logger.log("  Calculated late deliveries and late-trip days.")
         return self.df
 
     def determine_locality_flag(self):
         """Flag customers as local or not based on proximity."""
         # Apply proximity check using geodesic distance
         self.df['is_local'] = self.df.apply(lambda row: geodesic((row['latitude'], row['longitude']), self.store_location).km <= 10, axis=1)
-        self.logger.log("✅ Determined locality flag based on proximity.")
+        self.logger.log("  Determined locality flag based on proximity.")
         return self.df
 
     def transform(self):
