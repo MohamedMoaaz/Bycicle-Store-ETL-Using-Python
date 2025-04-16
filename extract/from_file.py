@@ -7,17 +7,17 @@ class FileExtractor:
         self.base_folder = Path(base_folder)
         self.logger = Logger()
 
-    def extract_from_csv(self, department=None, filenames=None):
+    def extract_from_csv(self, department, filenames=None):
+        department_path = self.base_folder / department
+        
         if filenames is None:
-            filenames = [file.name for file in (self.base_folder / department).glob("*.csv")]
+            filenames = [file.name for file in department_path.glob("*.csv")]
         
         all_data = {}
         for filename in filenames:
-            file_path = self.base_folder / department / filename
+            file_path = department_path / filename
             df = pd.read_csv(file_path)
             all_data[filename] = df
-            self.logger.log(f"✅ Extracted {len(df)} rows from {file_path}")
+            self.logger.log(f"✅ Extracted {len(df)} rows from {filename} in {department}")
+        
         return all_data
-    
-
-
