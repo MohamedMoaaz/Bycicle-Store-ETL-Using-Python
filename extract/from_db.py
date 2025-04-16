@@ -8,5 +8,5 @@ class DatabaseExtractor:
 
     def extract_from_postgres(self, query, engine):
         df = pd.read_sql(query, engine)
-        self.logger.log(f"✅ Extracted {len(df)} rows from PostgreSQL")
+        self.logger.log(f"  Extracted {len(df)} rows from PostgreSQL")
         return df
