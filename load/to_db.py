@@ -7,4 +7,4 @@ class DataBaseLoader:
 
     def load_to_postgres(self, df, table_name, if_exists="replace", index=False):
         df.to_sql(table_name, con=self.engine, if_exists=if_exists, index=index)
-        self.logger.log(f"✅ Loaded {len(df)} rows into {table_name} in PostgreSQL")
+        self.logger.log(f"  Loaded {len(df)} rows into {table_name} in PostgreSQL")
