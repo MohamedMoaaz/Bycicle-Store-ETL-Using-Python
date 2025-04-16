@@ -9,4 +9,4 @@ class FileLoader:
     def load_to_csv(self, df, department, file_name):
         file_path = self.folder_path / department / file_name  
         df.to_csv(file_path, index=False)
-        self.logger.log(f"✅ Loaded {len(df)} rows into {file_name} in {department}")
+        self.logger.log(f"  Loaded {len(df)} rows into {file_name} in {department}")
