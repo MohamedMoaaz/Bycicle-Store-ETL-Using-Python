@@ -12,7 +12,7 @@ class DataValidator:
             self.df.fillna(fill_value, inplace=True)
         else:
             self.df[columns].fillna(fill_value, inplace=True)
-        self.logger.log(f"✅ Handled null values in columns: {columns} with fill value: {fill_value}")
+        self.logger.log(f"  Handled null values in columns: {columns} with fill value: {fill_value}")
         return self.df
 
     def remove_duplicates(self):
@@ -20,7 +20,7 @@ class DataValidator:
         before = len(self.df)
         self.df.drop_duplicates(inplace=True)
         after = len(self.df)
-        self.logger.log(f"✅ Removed {before - after} duplicate rows")
+        self.logger.log(f"  Removed {before - after} duplicate rows")
         return self.df
 
     def validate_data(self):
@@ -31,5 +31,5 @@ class DataValidator:
         if 'order_date' in self.df.columns:
             self.df['order_date'] = pd.to_datetime(self.df['order_date'], errors='coerce')
             self.df.dropna(subset=['order_date'], inplace=True)
-            self.logger.log("✅ Validated data types and handled errors")
+            self.logger.log("  Validated data types and handled errors")
         return self.df
