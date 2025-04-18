@@ -7,7 +7,6 @@ class DataValidator:
         self.logger = Logger()
 
     def handle_nulls(self, columns=None, fill_value=0):
-        
         if columns is None:
             self.df.fillna(fill_value, inplace=True)
         else:
@@ -16,7 +15,6 @@ class DataValidator:
         return self.df
 
     def remove_duplicates(self):
-        
         before = len(self.df)
         self.df.drop_duplicates(inplace=True)
         after = len(self.df)
@@ -30,6 +28,5 @@ class DataValidator:
 
         if 'order_date' in self.df.columns:
             self.df['order_date'] = pd.to_datetime(self.df['order_date'], errors='coerce')
-            self.df.dropna(subset=['order_date'], inplace=True)
             self.logger.log("  Validated data types and handled errors")
         return self.df
